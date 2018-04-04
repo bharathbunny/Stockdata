@@ -13,7 +13,7 @@ import bt
 stocks=pd.read_csv('symbols.txt',sep='|')
 ts=TimeSeries(key='AIGN7DB0PZGS3C4X', output_format='pandas')
 
-
+#%%
 data2,meta=ts.get_daily_adjusted(symbol='ACUR',outputsize='full')
 
 data=bt.get('BTC',start='2017-10-01')
@@ -55,7 +55,7 @@ import numpy as np
 data=pd.read_sql("  select distinct symbol,max(pricedate) pricedate from historicalprices  group by  symbol",cnxn)
 for i in data.symbol:
     try:
-        data2,meta=ts.get_daily_adjusted(symbol=i)
+        data2,meta=ts.get_daily_adjusted(symbol=i,outputsize=10)
         data2['symbol']=str(i)
         data2.reset_index(level=0,inplace=True)
         cols=['symbol','Date', 'low', 'open', 'high', 'close', 'volume', 'adjusted close', 'split coefficient', 'dividend amount' ]
